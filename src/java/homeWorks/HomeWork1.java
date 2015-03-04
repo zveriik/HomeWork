@@ -23,7 +23,7 @@ public class HomeWork1 {
 
     private static int findNumberWithoutfor(Scanner in, int[] array, int first, int last){
         int pivot = first + (last - first)/2;
-        int check = array[pivot];
+        int check = array[pivot]+1;
         System.out.println(check);
         System.out.println("Больше [+], меньше [-], угадал [=]");
         String str = in.nextLine();
