@@ -9,7 +9,7 @@ public class HomeWork1 {
         Scanner in = new Scanner(System.in);
 
         System.out.println("Загадайте число от 1 до 100");
-        int a = findNumberWithoutfor(in, initArray(), 0, 99);
+        int a = findNumberWithoutFor(in, initArray(), 0, 99);
         System.out.print("Ваше число: " + a);
     }
 
@@ -21,7 +21,7 @@ public class HomeWork1 {
         return initArray;
     }
 
-    private static int findNumberWithoutfor(Scanner in, int[] array, int first, int last){
+    private static int findNumberWithoutFor(Scanner in, int[] array, int first, int last){
         int pivot = first + (last - first)/2;
         int check = array[pivot]+1;
         System.out.println(check);
@@ -30,9 +30,9 @@ public class HomeWork1 {
         if (str.equals("=")){
             return check;
         } else if (str.equals("+")){
-            return findNumberWithoutfor(in, array, pivot + 1, last);
+            return findNumberWithoutFor(in, array, pivot + 1, last);
         } else {
-            return findNumberWithoutfor(in, array, first, pivot);
+            return findNumberWithoutFor(in, array, first, pivot);
         }
     }
 }
