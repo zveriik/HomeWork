@@ -4,18 +4,13 @@ import java.util.Scanner;
 
 public class HomeWork1 {
 
-    Scanner in = new Scanner(System.in);
-
     public static void main(String[] args) {
 
         Scanner in = new Scanner(System.in);
 
-
         System.out.println("Загадайте число от 1 до 100");
-        findNumber(in, initArray(), 0, 99);
-
-
-
+        int a = findNumberWithoutfor(in, initArray(), 0, 99);
+        System.out.print("Ваше число: " + a);
     }
 
     private static int[] initArray(){
@@ -26,16 +21,18 @@ public class HomeWork1 {
         return initArray;
     }
 
-    private static int findNumber(Scanner in, int [] array, int first, int last){
-
-        int answear = array[last/2+first];
-        System.out.println(answear);
+    private static int findNumberWithoutfor(Scanner in, int[] array, int first, int last){
+        int pivot = first + (last - first)/2;
+        int check = array[pivot];
+        System.out.println(check);
+        System.out.println("Больше [+], меньше [-], угадал [=]");
         String str = in.nextLine();
-        if (str.equals("+")){
-            findNumber(in, array, answear+1, last);
+        if (str.equals("=")){
+            return check;
+        } else if (str.equals("+")){
+            return findNumberWithoutfor(in, array, pivot + 1, last);
         } else {
-            findNumber(in, array, first, answear-1);
+            return findNumberWithoutfor(in, array, first, pivot);
         }
-        return answear;
     }
 }
