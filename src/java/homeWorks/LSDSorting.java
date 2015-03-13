@@ -11,18 +11,23 @@ public class LSDSorting {
     public static void main(String[] args) {
 
         int[] array = generateRandomArray(1000000);
-        int[] copy1 = array.clone();
-        int[] copy2 = array.clone();
+        int[][] arrays = new int[6][];
+        for (int i = 0; i < 6; i++) {
+            arrays[i] = array.clone();
+        }
 
-        System.out.println(Arrays.toString(array));
-        long start = System.currentTimeMillis();
-        sortLSD(copy1);
-        System.out.println("LSD time: " + (System.currentTimeMillis() - start));
+        long start = System.nanoTime();
+        Arrays.sort(arrays[0]);
+        System.out.println("QuickSort time: " + ((double) (System.nanoTime() - start)) / 1000000000d + " сек");
 
-        start = System.currentTimeMillis();
-        Arrays.sort(copy2);
-        System.out.println("QuickSort time: " + (System.currentTimeMillis() - start));
-
+        System.out.println("Some analysis of the sort of word width...");
+        for (int i = 1; i < 6; i++) {
+            start = System.nanoTime();
+//            System.out.println(Arrays.toString(arrays[i]));
+            sortLSD(arrays[i], 32, 1 << i - 1);
+//            System.out.println(Arrays.toString(arrays[i])); for checking sorting
+            System.out.println("LSD time for width " + (1 << i - 1) + ", time: " + ((double) (System.nanoTime() - start)) / 1000000000d + " сек");
+        }
     }
 
     private static int[] generateRandomArray(int max) {
@@ -34,29 +39,38 @@ public class LSDSorting {
         return array;
     }
 
-    //iteration int by bit too slow, by byte optimal
-    private static void sortLSD(int[] a) {
+    /**
+     * Add parameters total and step for analyze dependence on time from the width of sorting word
+     *
+     * @param a     - sorting array
+     * @param total - size of each element in array's cell
+     * @param step  - width of sorting word
+     */
+    private static void sortLSD(int[] a, int total, int step) {
 
-        int len = a.length;
-        int iteration = 256;
-        int[] aux = new int[len];
-        for (int d = 0; d < 4; d++) {
+        int size = a.length;
+        int iteration = 1 << step;
+        int mask = (1 << step) - 1;
+        int[] aux = new int[size];
+
+        for (int d = 0; d < total /step; d++) {
 
             int[] count = new int[iteration + 1];
 
-            for (int i = 0; i < len; i++) {
-                count[((0b11111111 & a[i] >>> d) + 1)]++;
+            for (int i = 0; i < size; i++) {
+
+                count[(mask & (a[i] >> step * d)) + 1]++;
             }
 
-            for (int i = 0; i < i; i++) {
+            for (int i = 0; i < iteration; i++) {
                 count[i + 1] += count[i];
             }
 
-            for (int i = 0; i < len; i++) {
-                aux[count[(0b11111111 & a[i] >>> d)]++] = a[i];
+            for (int i = 0; i < size; i++) {
+                aux[count[mask & (a[i] >> step * d)]++] = a[i];
             }
 
-            for (int i = 0; i < len; i++) {
+            for (int i = 0; i < size; i++) {
                 a[i] = aux[i];
             }
         }
