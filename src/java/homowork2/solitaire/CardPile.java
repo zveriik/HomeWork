@@ -54,6 +54,7 @@ class CardPile {
 			result = firstCard;
 			firstCard = firstCard.link;
 		}
+        length--;
 		return result;
 	}
 
