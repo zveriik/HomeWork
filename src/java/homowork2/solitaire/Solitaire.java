@@ -1,4 +1,4 @@
-package homeWorks.solitaire;
+package homowork2.solitaire;
 
 /*
  Simple Solitaire Card Game in Java

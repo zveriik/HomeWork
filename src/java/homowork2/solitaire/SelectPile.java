@@ -1,4 +1,4 @@
-package homeWorks.solitaire;
+package homowork2.solitaire;
 
 /**
  * Created by Aleksey_Zverkov on 3/30/2015.
