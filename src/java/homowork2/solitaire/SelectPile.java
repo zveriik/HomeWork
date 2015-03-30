@@ -3,7 +3,7 @@ package homowork2.solitaire;
 /**
  * Created by Aleksey_Zverkov on 3/30/2015.
  */
-public class SelectPile extends CardPile {
+class SelectPile extends CardPile {
 
     public SelectPile(int xl, int yl) {
         super(xl, yl);
