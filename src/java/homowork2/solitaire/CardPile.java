@@ -9,11 +9,13 @@ class CardPile {
 	// coordinates of the card pile
 	protected int x;
 	protected int y;
+    protected int length;
 
 	CardPile(final int xl, final int yl) {
 		x = xl;
 		y = yl;
 		firstCard = null;
+        length = 0;
 	}
 
 	// the following are sometimes overridden
@@ -21,6 +23,7 @@ class CardPile {
 	public void addCard(final Card aCard) {
 		aCard.link = firstCard;
 		firstCard = aCard;
+        length++;
 	}
 
 	public boolean canTake(final Card aCard) {

@@ -30,7 +30,7 @@ class TablePile extends SelectPile {
 
 	public boolean includes(final int tx, final int ty) {
 		// don't test bottom of card
-		return x <= tx && tx <= x + Card.width && y <= ty;
+		return x <= tx && tx <= x + Card.width && y <= ty && ty <= y + Card.height+35*(length-1);
 	}
 
     @Override
