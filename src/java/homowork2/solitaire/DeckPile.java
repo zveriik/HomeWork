@@ -32,9 +32,17 @@ class DeckPile extends CardPile {
 		}
 	}
 
+    private void reuse(){
+        while (!Solitaire.discardPile.empty()) {
+            Card card = Solitaire.discardPile.pop();
+            card.flip();
+            Solitaire.deckPile.addCard(card);
+        }
+    }
+
 	public void select(final int tx, final int ty) {
 		if (empty()) {
-			return;
+			reuse();
 		}
 		Solitaire.discardPile.addCard(pop());
 	}

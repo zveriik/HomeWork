@@ -53,8 +53,8 @@ class CardPile {
 		if (firstCard != null) {
 			result = firstCard;
 			firstCard = firstCard.link;
+            length--;
 		}
-        length--;
 		return result;
 	}
 
