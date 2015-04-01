@@ -43,6 +43,7 @@ class DeckPile extends CardPile {
 	public void select(final int tx, final int ty) {
 		if (empty()) {
 			reuse();
+            return;
 		}
 		Solitaire.discardPile.addCard(pop());
 	}
