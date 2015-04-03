@@ -12,16 +12,19 @@ public class MyLinkedBasedStack<T> {
 	}
 
 	private Node entry;
+    private int capacity;
 
 	public void push(final T item) {
 		Node tmp = new Node(item, entry);
         entry = tmp;
+        capacity++;
 	}
 
     public T pop() {
         try{
             T item = (T) entry.item;
             entry = entry.previous;
+            capacity--;
             return item;
         } catch (Exception e){
             System.out.println("Stack empty");
@@ -37,6 +40,10 @@ public class MyLinkedBasedStack<T> {
             System.out.println("Stack empty");
             return null;
         }
+    }
+
+    public int length(){
+        return capacity;
     }
 
 }
